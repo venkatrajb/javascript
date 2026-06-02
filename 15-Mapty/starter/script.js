@@ -105,6 +105,8 @@ class App {
     const validInputs = (...inputs) =>
       inputs.every(inp => Number.isFinite(inp));
 
+    const allPositive = (...inputs) => inputs.every(inp => inp > 0);
+
     // Get data from form
     const type = inputType.value;
     const distance = +inputDistance.value;
@@ -117,12 +119,13 @@ class App {
     if (type === 'running') {
       const cadence = +inputCadence.value;
 
-      // Check if the data is valid
+      // Check if the data is validgit remote -v
       if (
         // !Number.isFinite(distance) ||
         // !Number.isFinite(duration) ||
         // !Number.isFinite(cadence)
-        !validInputs(distance, duration, cadence)
+        !validInputs(distance, duration, cadence) ||
+        !allPositive(distance, duration, cadence)
       )
         return alert('Input has to be positive number.');
     }
@@ -136,7 +139,8 @@ class App {
         // !Number.isFinite(distance) ||
         // !Number.isFinite(duration) ||
         // !Number.isFinite(elevation)
-        !validInputs(distance, duration, elevation)
+        !validInputs(distance, duration, elevation) ||
+        !allPositive(distance, duration)
       )
         return alert('Input has to be positive number.');
     }
